@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css"  media="all">
+    <script  src="/webjars/jquery/3.5.1/jquery.js"></script>
+    <style>
+        #loginForm{
+            width: 600px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -150px 0 0 -300px;
+            background: aqua;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        #loginname{
+            width: 400px;
+            height: 50px;
+        }
+        #password{
+            width: 400px;
+            height: 50px;
+        }
+        #loginBox{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -65px
+        }
+        #loginBtn{
+            position: relative;
+            left: 50%;
+            margin-left: -40px;
+        }
+        img{
+            position: relative;
+            margin-top: -210px;
+        }
+        #code{
+            width: 400px;
+            height: 50px;
+        }
+        #loginCodeBtn{
+            position: relative;
+            left: 50%;
+            margin-left: -40px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#loginBtn").on("click", function () {
+                var loginname = document.getElementById('loginname').value;
+                var password = document.getElementById('password').value;
+                $.ajax({
+                    url: "/wfs/employeelogin",
+                    type: "POST",
+                    data: {loginname: loginname, password: password},
+                    success: function (result) {
+                        if (result === "success") {
+                            // window.location.href = "/wfs/home";
+                            document.getElementById("loginBox").innerHTML="<label for=\"code\">验证码</label><input type=\"text\" name=\"loginname\" id=\"code\" placeholder=\"请输入验证码\"><br><br><br>\n" +
+                                "<button  class=\"layui-btn layui-btn-lg\" id=\"loginCodeBtn\">登录</button>";
+                        } else {
+                            alert("账号或密码错误");
+                        }
+                    }
+                })
+            });
+            $("#loginCodeBtn").on("click",function (){
+                var code = document.getElementById('code').value;
+                $.ajax({
+                    url: "/wfs/loginCode",
+                    type: "POST",
+                    data: {code:code},
+                    success:function (result) {
+                        if (result==="success"){
+                            window.location.href = "/wfs/home";
+                        }else {
+                            alert("验证码错误")
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="loginForm">
+            <img src="logo_edianzu.png" alt="">
+            <div id="loginBox">
+                <label for="loginname">邮箱</label><input type="text" name="loginname" id="loginname" placeholder="请输入邮箱"><br><br><br>
+                <label for="password">密码</label><input type="password" name="password" id="password" placeholder="请输入密码"><br><br>
+                <button  class="layui-btn layui-btn-lg" id="loginBtn">登录</button>
+            </div>
+    </div>
+</body>
+</html>

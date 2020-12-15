@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url:  jdbc:mysql://127.0.0.1:3306/edianzu_wfs?employee&serverTimezone=UTC
+    username: root
+    password: zhang19980222
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    default-encoding: utf-8
+    protocol: smtp
+    username: 3283903579@qq.com
+    password: tjsudopnttuadbbh
+logging:
+  level:
+    com.example.edianzuwfs.mapper: debug
