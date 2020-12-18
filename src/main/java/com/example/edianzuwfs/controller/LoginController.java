@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -79,6 +80,16 @@ public class LoginController {
             return "success";
         }
         return "fail";
+    }
+
+    /**
+     * 主页请求
+     * @return 主页
+     */
+    @ResponseBody
+    @RequestMapping("/wfs/main")
+    public String main(){
+        return "欢迎来到易点租库外管理系统！暂时不知道应该有点什么功能，如果有想法，请留言";
     }
     /**
      * 发送邮件

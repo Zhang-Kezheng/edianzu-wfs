@@ -73,7 +73,7 @@
                     }
                 })
             });
-            $("#loginCodeBtn").on("click",function (){
+            $("body").on("click","#loginCodeBtn",function (){
                 var code = document.getElementById('code').value;
                 $.ajax({
                     url: "/wfs/loginCode",
@@ -95,7 +95,7 @@
     <div id="loginForm">
             <img src="logo_edianzu.png" alt="">
             <div id="loginBox">
-                <label for="loginname">邮箱</label><input type="text" name="loginname" id="loginname" placeholder="请输入邮箱"><br><br><br>
+                <label for="loginname">账号</label><input type="text" name="loginname" id="loginname" placeholder="请输入账号"><br><br><br>
                 <label for="password">密码</label><input type="password" name="password" id="password" placeholder="请输入密码"><br><br>
                 <button  class="layui-btn layui-btn-lg" id="loginBtn">登录</button>
             </div>
