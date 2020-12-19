@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Employee {
     private Integer index;
-    private String loginname;
     private String password;
     private String username;
     private String email;

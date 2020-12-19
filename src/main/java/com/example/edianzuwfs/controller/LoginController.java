@@ -91,6 +91,30 @@ public class LoginController {
     public String main(){
         return "欢迎来到易点租库外管理系统！暂时不知道应该有点什么功能，如果有想法，请留言";
     }
+
+    /**
+     * 去注册页
+     * @return 注册页
+     */
+    @GetMapping("/wfs/register")
+    public String register(){
+        return "register";
+    }
+    /**
+     * 注册
+     * @param employee 员工信息
+     * @return
+     */
+
+    @ResponseBody
+    @PostMapping("/wfs/register")
+    public String register(Employee employee){
+        int i = loginService.employeeRegister(employee);
+        if (i>0){
+            return "success";
+        }
+        return "fail";
+    }
     /**
      * 发送邮件
      * @param code 验证码

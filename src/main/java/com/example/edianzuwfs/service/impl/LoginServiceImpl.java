@@ -17,4 +17,15 @@ public class LoginServiceImpl implements LoginService {
     public Employee employeeLogin(Employee employee) {
         return loginMapper.employeeLogin(employee) ;
     }
+
+    /**
+     * 员工注册
+     *
+     * @param employee 员工信息
+     * @return 1为成功，0为失败
+     */
+    @Override
+    public int employeeRegister(Employee employee) {
+        return loginMapper.employeeRegister(employee);
+    }
 }

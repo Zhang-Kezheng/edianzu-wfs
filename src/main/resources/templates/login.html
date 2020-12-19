@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css"  media="all">
     <script  src="/webjars/jquery/3.5.1/jquery.js"></script>
     <style>
+        body{
+            background-image: url(/04-bizhi-1920×1080.jpg);
+        }
         #loginForm{
             width: 600px;
             height: 300px;
@@ -13,13 +16,13 @@
             left: 50%;
             top: 50%;
             margin: -150px 0 0 -300px;
-            background: aqua;
+            border: aqua 2px solid;
             display: flex;
             align-items: center;
             justify-content: center;
 
         }
-        #loginname{
+        #email{
             width: 400px;
             height: 50px;
         }
@@ -35,9 +38,7 @@
             margin-top: -65px
         }
         #loginBtn{
-            position: relative;
-            left: 50%;
-            margin-left: -40px;
+            float: right;
         }
         img{
             position: relative;
@@ -56,16 +57,16 @@
     <script>
         $(document).ready(function() {
             $("#loginBtn").on("click", function () {
-                var loginname = document.getElementById('loginname').value;
+                var email = document.getElementById('email').value;
                 var password = document.getElementById('password').value;
                 $.ajax({
                     url: "/wfs/employeelogin",
                     type: "POST",
-                    data: {loginname: loginname, password: password},
+                    data: {email: email, password: password},
                     success: function (result) {
                         if (result === "success") {
                             // window.location.href = "/wfs/home";
-                            document.getElementById("loginBox").innerHTML="<label for=\"code\">验证码</label><input type=\"text\" name=\"loginname\" id=\"code\" placeholder=\"请输入验证码\"><br><br><br>\n" +
+                            document.getElementById("loginBox").innerHTML="<input type=\"text\" name=\"code\" id=\"code\" placeholder=\"请输入验证码\"><br><br><br>\n" +
                                 "<button  class=\"layui-btn layui-btn-lg\" id=\"loginCodeBtn\">登录</button>";
                         } else {
                             alert("账号或密码错误");
@@ -95,9 +96,10 @@
     <div id="loginForm">
             <img src="logo_edianzu.png" alt="">
             <div id="loginBox">
-                <label for="loginname">账号</label><input type="text" name="loginname" id="loginname" placeholder="请输入账号"><br><br><br>
-                <label for="password">密码</label><input type="password" name="password" id="password" placeholder="请输入密码"><br><br>
+                <input type="text" name="email" id="email" placeholder="邮箱" required="required"><br><br><br>
+                <input type="password" name="password" id="password" placeholder="密码" required="required"><br><br>
                 <button  class="layui-btn layui-btn-lg" id="loginBtn">登录</button>
+                <a href="/wfs/register" class="layui-btn layui-btn-lg" id="registerBtn">注册</a>
             </div>
     </div>
 </body>
