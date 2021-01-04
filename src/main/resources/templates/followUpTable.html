@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FollowUpTable</title>
+    <link rel="stylesheet" href="/webjars/layui/2.5.6/css/layui.css">
+</head>
+<body>
+<button  class="layui-btn layui-btn-lg">添加</button>
+<button  class="layui-btn layui-btn-lg">删除</button>
+<table id="demo" lay-filter="test" ></table>
+
+<script src="/webjars/layui/2.5.6/layui.js"></script>
+<script src="/webjars/jquery/3.5.1/jquery.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,url: '/wfs/getFollowUpTableData?userID='+1
+            ,page: true //开启分页
+            ,cols: [
+                [ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'customer_name', title: '客户名称', width:135}
+                ,{field: 'region_kliencki', title: '客户区域', width:135, sort: true}
+                ,{field: 'push_people', title: '推进人', width:80}
+                ,{field: 'policy_marker', title: '决策人', width: 80}
+                ,{field: 'contact_way', title: '联系方式', width: 135, sort: true}
+                ,{field: 'company_address', title: '公司地址', width: 135, sort: true}
+                ,{field: 'customer_main_business', title: '客户主营业务', width: 135}
+                ,{field: 'last_follow_up_time', title: '上次跟进时间', width: 135, sort: true}
+                ,{field: 'follow_up_case', title: '跟进情况', width: 135, sort: true}
+            ]
+            ]
+        });
+
+    });
+</script>
+</body>
+
+</html>

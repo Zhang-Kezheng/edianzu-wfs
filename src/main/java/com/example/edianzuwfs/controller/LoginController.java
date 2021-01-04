@@ -32,6 +32,7 @@ public class LoginController {
      */
     @Resource
     private JavaMailSender mailSender;
+
     /**
      * 员工登录
      * @param employee 员工
@@ -39,7 +40,7 @@ public class LoginController {
      */
     @ResponseBody
     @PostMapping("/wfs/employeelogin")
-    public String employeeLogin(Employee employee, HttpServletRequest request){
+    public String employeeLogin(Employee employee, HttpServletRequest request ){
         Employee login = loginService.employeeLogin(employee);
         Random random=new Random();
         String code="";
@@ -49,7 +50,8 @@ public class LoginController {
         }
         request.getSession().setAttribute("code",code);
         if (login!=null){
-            sendMail(code,login.getEmail());
+            request.getSession().setAttribute("user",login);
+            sendMail(code,employee.getEmail());
             return "success";
         }
         return "fail";
@@ -66,7 +68,7 @@ public class LoginController {
 
     /**
      * 跳转主页
-     * @return 返回主页
+     * @return 主页
      */
     @GetMapping("/wfs/home")
     public String loginSuccess(){
@@ -76,7 +78,9 @@ public class LoginController {
     @PostMapping("/wfs/loginCode")
     public String loginCode(HttpServletRequest request,String code){
         String code1 = (String) request.getSession().getAttribute("code");
+
         if (code1.equals(code)){
+
             return "success";
         }
         return "fail";
